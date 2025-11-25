@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@import 'tailwindcss';
+
+body {
+	background-color: #ffffff;
+	color: #111111;
+	font-family: 'JetBrains Mono', monospace;
+	font-weight: 700;
+}
+
+.diagonal-stripes {
+	background: repeating-linear-gradient(45deg, #ffffff, #ffffff 10px, #f9fafb 10px, #f9fafb 20px);
+}
