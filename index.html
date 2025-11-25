@@ -1,182 +1,229 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blueprint Style Thumbnails</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-        }
-        .hard-drop {
-            box-shadow: 4px 4px 0px 0px #000000;
-        }
-        .dot-grid {
-            background-image: radial-gradient(circle, #d1d5db 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .diagonal-stripes {
-            background: repeating-linear-gradient(
-                45deg,
-                #ffffff,
-                #ffffff 10px,
-                #f9fafb 10px,
-                #f9fafb 20px
-            );
-        }
-    </style>
-</head>
-<body class="bg-gray-50 p-8">
-    <div class="max-w-4xl mx-auto space-y-8">
-
-        <!-- Option A: "The Equation" -->
-        <div class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden">
-            <div class="absolute top-6 left-6 text-black text-xl">
-                [ 01. THE FORMULA ]
-            </div>
-
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="bg-white border-4 border-black hard-drop px-16 py-12">
-                    <div class="text-black text-8xl text-center">
-                        (D×R×I)/M
-                    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blueprint Style Thumbnails</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                font-family: "JetBrains Mono", monospace;
+                font-weight: 700;
+            }
+            .hard-drop {
+                box-shadow: 4px 4px 0px 0px #000000;
+            }
+            .dot-grid {
+                background-image: radial-gradient(
+                    circle,
+                    #d1d5db 1px,
+                    transparent 1px
+                );
+                background-size: 20px 20px;
+            }
+            .diagonal-stripes {
+                background: repeating-linear-gradient(
+                    45deg,
+                    #ffffff,
+                    #ffffff 10px,
+                    #f9fafb 10px,
+                    #f9fafb 20px
+                );
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 p-8">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <!-- Option A: "The Equation" -->
+            <div
+                class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="absolute top-6 left-6 text-black text-xl">
+                    [ 01. THE FORMULA ]
                 </div>
-            </div>
 
-            <div class="absolute bottom-12 right-12 bg-yellow-400 border-3 border-black px-8 py-4 hard-drop transform rotate-2">
-                <div class="text-black text-3xl">STOP GUESSING.</div>
-            </div>
-        </div>
-
-        <!-- Option B: "The Scorecard" -->
-        <div class="w-full aspect-video bg-white border-4 border-black hard-drop relative overflow-hidden flex">
-            <!-- Left side: Strikethrough list -->
-            <div class="w-2/5 bg-gray-100 border-r-4 border-black flex flex-col justify-center pl-12">
-                <div class="space-y-6">
-                    <div class="relative">
-                        <div class="text-gray-400 text-3xl">Vibes</div>
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full h-1 bg-red-600"></div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="text-gray-400 text-3xl">Politics</div>
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full h-1 bg-red-600"></div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="text-gray-400 text-3xl">Hype</div>
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full h-1 bg-red-600"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div
+                        class="bg-white border-4 border-black hard-drop px-16 py-12"
+                    >
+                        <div class="text-black text-8xl text-center">
+                            (D×R×I)/M
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Right side: Score -->
-            <div class="w-3/5 flex items-center justify-center relative">
-                <div class="text-center">
-                    <div class="text-black text-9xl mb-4">92.5</div>
-                    <div class="text-yellow-400 text-4xl">IMPACT SCORE</div>
-                </div>
-
-                <div class="absolute top-6 right-6 bg-black text-white px-6 py-3 border-3 border-black hard-drop">
-                    <div class="text-sm">PRIORITY: CRITICAL</div>
+                <div
+                    class="absolute bottom-12 right-12 bg-yellow-400 border-3 border-black px-8 py-4 hard-drop transform rotate-2"
+                >
+                    <div class="text-black text-3xl">STOP GUESSING.</div>
                 </div>
             </div>
-        </div>
 
-        <!-- Option C: "The Dossier" -->
-        <div class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden">
-            <div class="absolute top-8 left-8 text-black text-sm">
-                THE DEVREL IMPACT MODEL
-            </div>
-
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-black text-9xl">ROI</div>
-            </div>
-
-            <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 bg-yellow-400 border-4 border-black hard-drop px-12 py-6">
-                <div class="text-black text-5xl">SOLVED</div>
-            </div>
-
-            <div class="absolute bottom-8 right-8 bg-white border-3 border-black px-6 py-2 hard-drop">
-                <div class="text-black text-xl">[ CALCULATE ]</div>
-            </div>
-        </div>
-
-        <!-- Variant: "Death to Vibes" -->
-        <div class="w-full aspect-video bg-white diagonal-stripes border-4 border-black hard-drop relative overflow-hidden">
-            <div class="absolute top-6 left-6 text-gray-500 text-base">
-                [ 01. THE PROBLEM ]
-            </div>
-
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <div class="text-black text-8xl mb-2">DEATH</div>
-                <div class="text-black text-8xl mb-2">TO</div>
-                <div class="text-yellow-400 text-9xl">VIBES</div>
-            </div>
-
-            <div class="absolute bottom-8 right-8 bg-black text-white px-6 py-3 border-3 border-black hard-drop">
-                <div class="text-xl">[ CALCULATE SCORE ]</div>
-            </div>
-        </div>
-
-        <!-- Variant: "The Method" -->
-        <div class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden">
-            <div class="absolute top-8 left-8">
-                <div class="text-black text-sm mb-2">[ SYSTEM ALERT ]</div>
-                <div class="text-black text-6xl mb-4">MEASURE</div>
-                <div class="text-black text-6xl mb-4">WHAT</div>
-                <div class="text-yellow-400 text-7xl">MATTERS</div>
-            </div>
-
-            <div class="absolute bottom-8 right-8 bg-white border-3 border-black px-8 py-4 hard-drop">
-                <div class="text-black text-3xl">2025</div>
-            </div>
-        </div>
-
-        <!-- Variant: "Impact Formula" -->
-        <div class="w-full aspect-video bg-black border-4 border-black hard-drop relative overflow-hidden">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="bg-white border-4 border-black px-20 py-16 hard-drop">
-                    <div class="text-center mb-6">
-                        <div class="text-black text-4xl mb-2">DEVREL</div>
-                        <div class="text-yellow-400 text-7xl">IMPACT</div>
+            <!-- Option B: "The Scorecard" -->
+            <div
+                class="w-full aspect-video bg-white border-4 border-black hard-drop relative overflow-hidden flex"
+            >
+                <!-- Left side: Strikethrough list -->
+                <div
+                    class="w-2/5 bg-gray-100 border-r-4 border-black flex flex-col justify-center pl-12"
+                >
+                    <div class="space-y-6">
+                        <div class="relative">
+                            <div class="text-gray-400 text-3xl">Vibes</div>
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full h-1 bg-red-600"></div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="text-gray-400 text-3xl">Politics</div>
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full h-1 bg-red-600"></div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="text-gray-400 text-3xl">Hype</div>
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full h-1 bg-red-600"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-black text-5xl text-center">FORMULA</div>
+                </div>
+
+                <!-- Right side: Score -->
+                <div class="w-3/5 flex items-center justify-center relative">
+                    <div class="text-center">
+                        <div class="text-black text-9xl mb-4">92.5</div>
+                        <div class="text-yellow-400 text-4xl">IMPACT SCORE</div>
+                    </div>
+
+                    <div
+                        class="absolute top-6 right-6 bg-black text-white px-6 py-3 border-3 border-black hard-drop"
+                    >
+                        <div class="text-sm">PRIORITY: CRITICAL</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option C: "The Dossier" -->
+            <div
+                class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="absolute top-8 left-8 text-black text-sm">
+                    THE DEVREL IMPACT MODEL
+                </div>
+
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-black text-9xl">ROI</div>
+                </div>
+
+                <div
+                    class="absolute bottom-1/4 left-1/2 -translate-x-1/2 bg-yellow-400 border-4 border-black hard-drop px-12 py-6"
+                >
+                    <div class="text-black text-5xl">SOLVED</div>
+                </div>
+
+                <div
+                    class="absolute bottom-8 right-8 bg-white border-3 border-black px-6 py-2 hard-drop"
+                >
+                    <div class="text-black text-xl">[ CALCULATE ]</div>
+                </div>
+            </div>
+
+            <!-- Variant: "Death to Vibes" -->
+            <div
+                class="w-full aspect-video bg-white diagonal-stripes border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="absolute top-6 left-6 text-gray-500 text-base">
+                    [ 01. THE PROBLEM ]
+                </div>
+
+                <div
+                    class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                    <div class="text-black text-8xl mb-2">DEATH</div>
+                    <div class="text-black text-8xl mb-2">TO</div>
+                    <div class="text-yellow-400 text-9xl">VIBES</div>
+                </div>
+
+                <div
+                    class="absolute bottom-8 right-8 bg-black text-white px-6 py-3 border-3 border-black hard-drop"
+                >
+                    <div class="text-xl">[ CALCULATE SCORE ]</div>
+                </div>
+            </div>
+
+            <!-- Variant: "The Method" -->
+            <div
+                class="w-full aspect-video bg-white dot-grid border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="absolute top-8 left-8">
+                    <div class="text-black text-sm mb-2">[ SYSTEM ALERT ]</div>
+                    <div class="text-black text-6xl mb-4">MEASURE</div>
+                    <div class="text-black text-6xl mb-4">WHAT</div>
+                    <div class="text-yellow-400 text-7xl">MATTERS</div>
+                </div>
+
+                <div
+                    class="absolute bottom-8 right-8 bg-white border-3 border-black px-8 py-4 hard-drop"
+                >
+                    <div class="text-black text-3xl">2025</div>
+                </div>
+            </div>
+
+            <!-- Variant: "Impact Formula" -->
+            <div
+                class="w-full aspect-video bg-black border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div
+                        class="bg-white border-4 border-black px-20 py-16 hard-drop"
+                    >
+                        <div class="text-center mb-6">
+                            <div class="text-black text-4xl mb-2">DEVREL</div>
+                            <div class="text-yellow-400 text-7xl">IMPACT</div>
+                        </div>
+                        <div class="text-black text-5xl text-center">
+                            FORMULA
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Variant: "Priority Matrix" -->
+            <div
+                class="w-full aspect-video bg-white border-4 border-black hard-drop relative overflow-hidden"
+            >
+                <div class="grid grid-cols-2 h-full">
+                    <div
+                        class="border-r-4 border-b-4 border-black flex items-center justify-center"
+                    >
+                        <div class="text-gray-400 text-4xl">BUSY</div>
+                    </div>
+                    <div
+                        class="border-b-4 border-black flex items-center justify-center bg-gray-50"
+                    >
+                        <div class="text-gray-400 text-4xl">URGENT</div>
+                    </div>
+                    <div
+                        class="border-r-4 border-black flex items-center justify-center bg-gray-50"
+                    >
+                        <div class="text-gray-400 text-4xl">LATER</div>
+                    </div>
+                    <div class="flex items-center justify-center bg-yellow-400">
+                        <div class="text-black text-6xl">IMPACT</div>
+                    </div>
+                </div>
+
+                <div class="absolute top-6 left-6 text-black text-sm">
+                    [ PRIORITY MATRIX ]
                 </div>
             </div>
         </div>
-
-        <!-- Variant: "Priority Matrix" -->
-        <div class="w-full aspect-video bg-white border-4 border-black hard-drop relative overflow-hidden">
-            <div class="grid grid-cols-2 h-full">
-                <div class="border-r-4 border-b-4 border-black flex items-center justify-center">
-                    <div class="text-gray-400 text-4xl">BUSY</div>
-                </div>
-                <div class="border-b-4 border-black flex items-center justify-center bg-gray-50">
-                    <div class="text-gray-400 text-4xl">URGENT</div>
-                </div>
-                <div class="border-r-4 border-black flex items-center justify-center bg-gray-50">
-                    <div class="text-gray-400 text-4xl">LATER</div>
-                </div>
-                <div class="flex items-center justify-center bg-yellow-400">
-                    <div class="text-black text-6xl">IMPACT</div>
-                </div>
-            </div>
-
-            <div class="absolute top-6 left-6 text-black text-sm">
-                [ PRIORITY MATRIX ]
-            </div>
-        </div>
-
-    </div>
-</body>
+    </body>
 </html>
