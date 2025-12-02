@@ -1,0 +1,1921 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>DRIM | DevRel Impact Model</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						fontFamily: {
+							mono: ['JetBrains Mono', 'monospace']
+						},
+						colors: {
+							black: '#000000',
+							white: '#ffffff'
+						},
+						animation: {
+							blink: 'blink 1s step-end infinite'
+						},
+						keyframes: {
+							blink: {
+								'0%, 100%': { opacity: '1' },
+								'50%': { opacity: '0' }
+							}
+						}
+					}
+				}
+			};
+		</script>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #111111;
+				font-family: 'JetBrains Mono', monospace;
+				line-height: 1.75;
+			}
+			/* Custom Range Slider Styling */
+			input[type='range'] {
+				height: 6px;
+				-webkit-appearance: none;
+				width: 100%;
+				background: transparent;
+			}
+			input[type='range']::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				height: 16px;
+				width: 16px;
+				border-radius: 50%;
+				background: #000000;
+				cursor: pointer;
+				margin-top: -6px;
+				transition: transform 0.1s;
+			}
+			input[type='range']::-webkit-slider-thumb:hover {
+				transform: scale(1.1);
+			}
+			input[type='range']::-webkit-slider-runnable-track {
+				width: 100%;
+				height: 4px;
+				cursor: pointer;
+				background: #e5e7eb;
+				border-radius: 2px;
+			}
+			/* Animation */
+			.fade-in {
+				animation: fadeIn 0.5s ease-out forwards;
+				opacity: 0;
+			}
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(5px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			/* Thumbnail specifics */
+			.thumbnail-container {
+				width: 1280px;
+				height: 720px;
+				overflow: hidden;
+				position: relative;
+				margin-bottom: 4rem;
+				box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+				border: 1px solid #e5e5e5;
+			}
+			/* Stream Assets specific */
+			.stream-banner-container {
+				width: 100%;
+				max-width: 1280px;
+				aspect-ratio: 4/1;
+				overflow: hidden;
+				position: relative;
+				margin-bottom: 4rem;
+				box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+				border: 1px solid #000;
+			}
+			.stream-screen-container {
+				width: 100%;
+				max-width: 1280px;
+				aspect-ratio: 16/9;
+				overflow: hidden;
+				position: relative;
+				margin-bottom: 4rem;
+				box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+				border: 1px solid #000;
+			}
+		</style>
+		<script type="importmap">
+			{
+				"imports": {
+					"react/": "https://aistudiocdn.com/react@^19.2.0/",
+					"react": "https://aistudiocdn.com/react@^19.2.0"
+				}
+			}
+		</script>
+	</head>
+	<body class="bg-white text-[#111111] font-mono min-h-screen">
+		<!-- Sidebar Navigation -->
+		<nav id="sidebar" class="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-50">
+			<ul class="space-y-6">
+				<!-- 01 Problem -->
+				<li>
+					<a
+						href="#problem"
+						class="nav-link group flex items-center gap-3 transition-opacity duration-300 opacity-40 hover:opacity-100"
+						data-path="problem"
+					>
+						<span class="text-xs font-bold tracking-widest">01</span>
+						<span
+							class="nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 border-b border-transparent group-hover:border-black group-hover:pb-0.5"
+							>The Problem</span
+						>
+					</a>
+				</li>
+
+				<!-- 02 Solution -->
+				<li>
+					<a
+						href="#solution"
+						class="nav-link group flex items-center gap-3 transition-opacity duration-300 opacity-40 hover:opacity-100"
+						data-path="solution"
+					>
+						<span class="text-xs font-bold tracking-widest">02</span>
+						<span
+							class="nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 border-b border-transparent group-hover:border-black group-hover:pb-0.5"
+							>The Solution</span
+						>
+					</a>
+					<!-- Nested Nav -->
+					<ul
+						id="nav-solution-children"
+						class="ml-8 mt-3 space-y-3 border-l border-gray-200 pl-4 hidden"
+					>
+						<li>
+							<a
+								href="#solution"
+								class="sub-nav-link block text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+								data-path="solution"
+								>Overview</a
+							>
+						</li>
+						<li>
+							<a
+								href="#solution/variables"
+								class="sub-nav-link block text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+								data-path="solution/variables"
+								>Variables</a
+							>
+						</li>
+						<li>
+							<a
+								href="#solution/framework"
+								class="sub-nav-link block text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+								data-path="solution/framework"
+								>Framework</a
+							>
+						</li>
+						<li>
+							<a
+								href="#solution/types"
+								class="sub-nav-link block text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+								data-path="solution/types"
+								>Types</a
+							>
+						</li>
+					</ul>
+				</li>
+
+				<!-- 03 Simulator -->
+				<li>
+					<a
+						href="#simulator"
+						class="nav-link group flex items-center gap-3 transition-opacity duration-300 opacity-40 hover:opacity-100"
+						data-path="simulator"
+					>
+						<span class="text-xs font-bold tracking-widest">03</span>
+						<span
+							class="nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 border-b border-transparent group-hover:border-black group-hover:pb-0.5"
+							>The Simulator</span
+						>
+					</a>
+				</li>
+
+				<!-- 04 Guidelines -->
+				<li>
+					<a
+						href="#guidelines"
+						class="nav-link group flex items-center gap-3 transition-opacity duration-300 opacity-40 hover:opacity-100"
+						data-path="guidelines"
+					>
+						<span class="text-xs font-bold tracking-widest">04</span>
+						<span
+							class="nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 border-b border-transparent group-hover:border-black group-hover:pb-0.5"
+							>Guidelines</span
+						>
+					</a>
+				</li>
+
+				<!-- 05 Origin -->
+				<li>
+					<a
+						href="#origin"
+						class="nav-link group flex items-center gap-3 transition-opacity duration-300 opacity-40 hover:opacity-100"
+						data-path="origin"
+					>
+						<span class="text-xs font-bold tracking-widest">05</span>
+						<span
+							class="nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 border-b border-transparent group-hover:border-black group-hover:pb-0.5"
+							>Origin Story</span
+						>
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- Main Application Container -->
+		<div id="app-container" class="max-w-2xl mx-auto px-6 py-12 text-base sm:text-lg">
+			<!-- Header -->
+			<nav class="flex justify-end gap-6 mb-20 text-sm font-bold">
+				<a
+					href="https://twitter.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:bg-black hover:text-white px-1 transition-colors"
+					>Twitter</a
+				>
+				<a
+					href="https://github.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:bg-black hover:text-white px-1 transition-colors"
+					>GitHub</a
+				>
+				<a
+					href="https://cal.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:bg-black hover:text-white px-1 transition-colors"
+					>Office Hours</a
+				>
+			</nav>
+
+			<header class="mb-20">
+				<div class="flex items-center gap-4 mb-2">
+					<!-- Avatar Icon -->
+					<div
+						class="w-12 h-12 border-2 border-black bg-white p-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+					>
+						<svg
+							viewBox="0 0 100 100"
+							class="w-full h-full"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<rect width="100" height="100" fill="white" />
+							<rect
+								x="20"
+								y="15"
+								width="60"
+								height="70"
+								fill="white"
+								stroke="black"
+								stroke-width="4"
+							/>
+							<path d="M20 15H80V35H20V15Z" fill="black" />
+							<rect
+								x="25"
+								y="45"
+								width="20"
+								height="10"
+								fill="white"
+								stroke="black"
+								stroke-width="3"
+							/>
+							<rect
+								x="55"
+								y="45"
+								width="20"
+								height="10"
+								fill="white"
+								stroke="black"
+								stroke-width="3"
+							/>
+							<line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="3" />
+							<rect x="32" y="48" width="4" height="4" fill="black" />
+							<rect x="62" y="48" width="4" height="4" fill="black" />
+							<rect
+								x="68"
+								y="65"
+								width="15"
+								height="5"
+								fill="#FACC15"
+								stroke="black"
+								stroke-width="2"
+								transform="rotate(-15 68 65)"
+							/>
+							<line x1="40" y1="75" x2="60" y2="75" stroke="black" stroke-width="3" />
+						</svg>
+					</div>
+					<h1
+						class="text-3xl font-bold cursor-pointer hover:underline decoration-4 underline-offset-4 decoration-yellow-400"
+						onclick="window.location.hash='#problem'"
+					>
+						DRIM
+					</h1>
+				</div>
+				<div class="text-sm text-gray-500 font-bold">DevRel Impact Model</div>
+			</header>
+
+			<main id="main-content">
+				<!-- SECTION: PROBLEM -->
+				<section id="page-problem" class="page-section fade-in">
+					<h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+						01. The Problem
+					</h2>
+					<p class="mb-7">
+						Developer Relations teams often drown in "opportunity." Every conference, every
+						integration, every blog post feels urgent.
+					</p>
+					<p class="mb-7">
+						But not all work is equal. Without a clear decision-making framework, resources are
+						allocated based on vibes, internal politics, or whoever shouts the loudest. This leads
+						to burnout, lack of focus, and low-impact outcomes.
+					</p>
+					<div class="my-12 border-l-2 border-black pl-6 py-1">
+						<p class="mb-0 italic font-bold text-xl leading-tight">
+							"DevRel is not about vibes. It is about resource allocation."
+						</p>
+					</div>
+					<div class="mt-12 pt-12 border-t border-gray-100 flex justify-end">
+						<a
+							href="#solution"
+							class="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest hover:text-gray-600 transition-colors"
+						>
+							Discover The Solution
+							<span class="group-hover:translate-x-1 transition-transform">→</span>
+						</a>
+					</div>
+				</section>
+
+				<!-- SECTION: SOLUTION OVERVIEW -->
+				<section id="page-solution" class="page-section hidden fade-in">
+					<h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+						02. What is DRIM?
+					</h2>
+					<p class="mb-7">
+						DRIM (DevRel Impact Model) is a minimalist framework designed to quantify the
+						qualitative. It provides a consistent method to score potential activities so you can
+						ruthlessly prioritize.
+					</p>
+					<div
+						class="bg-gray-50 p-6 border border-gray-200 my-8 font-bold text-sm sm:text-base text-center select-all"
+					>
+						Score = (Demand × Reach × Impact) / Maintenance
+					</div>
+					<p class="mb-7">
+						By breaking down every potential activity into these four core variables, we remove
+						emotion from the equation and expose the true ROI of a task.
+					</p>
+					<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
+						<a
+							href="#solution/variables"
+							class="border border-gray-200 p-4 text-left hover:border-black transition-colors block"
+						>
+							<div class="text-[10px] font-bold uppercase text-gray-400 mb-1">Deep Dive</div>
+							<div class="font-bold text-sm">Variables</div>
+						</a>
+						<a
+							href="#solution/framework"
+							class="border border-gray-200 p-4 text-left hover:border-black transition-colors block"
+						>
+							<div class="text-[10px] font-bold uppercase text-gray-400 mb-1">Structure</div>
+							<div class="font-bold text-sm">The Framework</div>
+						</a>
+						<a
+							href="#solution/types"
+							class="border border-gray-200 p-4 text-left hover:border-black transition-colors block"
+						>
+							<div class="text-[10px] font-bold uppercase text-gray-400 mb-1">Examples</div>
+							<div class="font-bold text-sm">Activity Types</div>
+						</a>
+					</div>
+				</section>
+
+				<!-- SECTION: CONSTRUCTION PAGES (Variables, Framework, Types) -->
+				<!-- We will reuse a JS function to render content here or just static blocks -->
+				<section
+					id="page-solution-variables"
+					class="page-section hidden fade-in construction-zone"
+					data-title="Variables"
+				></section>
+				<section
+					id="page-solution-framework"
+					class="page-section hidden fade-in construction-zone"
+					data-title="The Framework"
+				></section>
+				<section
+					id="page-solution-types"
+					class="page-section hidden fade-in construction-zone"
+					data-title="Activity Types"
+				></section>
+
+				<!-- SECTION: SIMULATOR -->
+				<section id="page-simulator" class="page-section hidden fade-in">
+					<h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+						03. The Simulator
+					</h2>
+					<p class="mb-8">
+						Use the sliders below to calculate the priority score for any given task. Real-time
+						feedback helps you understand the trade-offs between Impact and Maintenance.
+					</p>
+					<!-- Calculator -->
+					<div
+						class="bg-white border border-black p-6 sm:p-8 mb-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+					>
+						<form onsubmit="return false">
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-100">
+								<div>
+									<label
+										for="initName"
+										class="block font-bold text-sm uppercase tracking-wider mb-2"
+										>Initiative Name</label
+									>
+									<input
+										type="text"
+										id="initName"
+										placeholder="e.g. Q4 Hackathon"
+										class="w-full bg-gray-50 border-b-2 border-gray-200 p-2 font-mono text-sm focus:outline-none focus:border-black focus:bg-white transition-colors"
+									/>
+								</div>
+								<div>
+									<label
+										for="estHours"
+										class="block font-bold text-sm uppercase tracking-wider mb-2"
+										>Est. Hours</label
+									>
+									<input
+										type="number"
+										id="estHours"
+										placeholder="0"
+										class="w-full bg-gray-50 border-b-2 border-gray-200 p-2 font-mono text-sm focus:outline-none focus:border-black focus:bg-white transition-colors"
+									/>
+								</div>
+							</div>
+							<div class="space-y-8">
+								<!-- Demand -->
+								<div>
+									<div class="flex justify-between items-end mb-2">
+										<label class="font-bold text-sm uppercase tracking-wider">Demand</label>
+										<span id="val-demand" class="font-bold font-mono">5</span>
+									</div>
+									<input type="range" id="demand" min="1" max="10" value="5" class="range-slider" />
+									<div class="text-xs text-gray-500 mt-2">
+										Volume of community requests or internal friction.
+									</div>
+								</div>
+								<!-- Reach -->
+								<div>
+									<div class="flex justify-between items-end mb-2">
+										<label class="font-bold text-sm uppercase tracking-wider">Reach</label>
+										<span id="val-reach" class="font-bold font-mono">5</span>
+									</div>
+									<input type="range" id="reach" min="1" max="10" value="5" class="range-slider" />
+									<div class="text-xs text-gray-500 mt-2">
+										Estimated number of developers affected.
+									</div>
+								</div>
+								<!-- Impact -->
+								<div>
+									<div class="flex justify-between items-end mb-2">
+										<label class="font-bold text-sm uppercase tracking-wider">Impact</label>
+										<span id="val-impact" class="font-bold font-mono">5</span>
+									</div>
+									<input type="range" id="impact" min="1" max="10" value="5" class="range-slider" />
+									<div class="text-xs text-gray-500 mt-2">
+										Strategic alignment and business value.
+									</div>
+								</div>
+								<!-- Maintenance -->
+								<div>
+									<div class="flex justify-between items-end mb-2">
+										<label class="font-bold text-sm uppercase tracking-wider">Maintenance</label>
+										<span id="val-maintenance" class="font-bold font-mono">5</span>
+									</div>
+									<input
+										type="range"
+										id="maintenance"
+										min="1"
+										max="10"
+										value="5"
+										class="range-slider"
+									/>
+									<div class="text-xs text-gray-500 mt-2">
+										Ongoing cost to sustain the resource.
+									</div>
+								</div>
+							</div>
+							<div class="mt-10 pt-6 border-t border-black flex justify-between items-center">
+								<div class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+									Final Score
+								</div>
+								<div id="final-score" class="text-4xl font-bold">25.0</div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+				<!-- SECTION: GUIDELINES -->
+				<section id="page-guidelines" class="page-section hidden fade-in">
+					<h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+						04. Guidelines
+					</h2>
+					<div class="space-y-6">
+						<div class="bg-blue-50 border-l-4 border-blue-500 p-4 text-sm">
+							<strong class="block text-blue-700 mb-1">Priority Threshold</strong>
+							<span class="text-blue-900"
+								>Scores above 50 indicate immediate priority. These are typically high impact tasks
+								with manageable maintenance costs.</span
+							>
+						</div>
+						<div class="bg-amber-50 border-l-4 border-amber-500 p-4 text-sm">
+							<strong class="block text-amber-700 mb-1">The Maintenance Trap</strong>
+							<span class="text-amber-900"
+								>Be cautious of scores between 20-40. These projects often look valuable but can
+								silently drain resources if Maintenance > 6.</span
+							>
+						</div>
+						<div class="bg-red-50 border-l-4 border-red-500 p-4 text-sm">
+							<strong class="block text-red-700 mb-1">Deprecation Zone</strong>
+							<span class="text-red-900"
+								>If Impact is low (< 3) and Maintenance is high (> 7), the activity should likely be
+								killed or automated, regardless of the score.</span
+							>
+						</div>
+						<div class="pt-8 mt-8 border-t border-gray-100 text-xs text-gray-400 italic">
+							* Disclaimer: The DRIM model is a heuristic tool for decision support. It is not a
+							replacement for strategic human judgment or company mandates.
+						</div>
+					</div>
+				</section>
+
+				<!-- SECTION: ORIGIN STORY -->
+				<section id="page-origin" class="page-section hidden fade-in">
+					<h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">
+						05. Origin Story
+					</h2>
+					<div
+						class="border-2 border-black p-1 bg-gray-100 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-shadow duration-300"
+					>
+						<div class="border border-black bg-white p-6 sm:p-8">
+							<div
+								class="flex flex-col sm:flex-row gap-8 mb-8 pb-8 border-b-2 border-black border-dashed"
+							>
+								<div class="shrink-0">
+									<div
+										class="w-24 h-24 sm:w-32 sm:h-32 bg-white flex items-center justify-center overflow-hidden border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+									>
+										<!-- The Architect Avatar -->
+										<svg
+											viewBox="0 0 100 100"
+											class="w-full h-full"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<rect width="100" height="100" fill="white" />
+											<rect
+												x="20"
+												y="15"
+												width="60"
+												height="70"
+												fill="white"
+												stroke="black"
+												stroke-width="4"
+											/>
+											<path d="M20 15H80V35H20V15Z" fill="black" />
+											<rect
+												x="25"
+												y="45"
+												width="20"
+												height="10"
+												fill="white"
+												stroke="black"
+												stroke-width="3"
+											/>
+											<rect
+												x="55"
+												y="45"
+												width="20"
+												height="10"
+												fill="white"
+												stroke="black"
+												stroke-width="3"
+											/>
+											<line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="3" />
+											<rect x="32" y="48" width="4" height="4" fill="black" />
+											<rect x="62" y="48" width="4" height="4" fill="black" />
+											<rect
+												x="68"
+												y="65"
+												width="15"
+												height="5"
+												fill="#FACC15"
+												stroke="black"
+												stroke-width="2"
+												transform="rotate(-15 68 65)"
+											/>
+											<line x1="40" y1="75" x2="60" y2="75" stroke="black" stroke-width="3" />
+										</svg>
+									</div>
+								</div>
+								<div class="flex flex-col justify-center">
+									<div
+										class="inline-block bg-black text-white text-[10px] font-bold px-2 py-1 mb-2 w-fit uppercase tracking-widest"
+									>
+										Creator Profile
+									</div>
+									<h3 class="text-2xl sm:text-3xl font-bold mb-1">Alex Chen</h3>
+									<p class="text-xs sm:text-sm font-mono text-gray-500 mb-4">
+										@architect_alex • San Francisco, CA
+									</p>
+									<p class="text-sm italic font-serif">
+										"If you can't measure it, you're just guessing."
+									</p>
+								</div>
+							</div>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+								<div>
+									<h4
+										class="font-bold uppercase text-xs tracking-widest mb-4 border-b-2 border-black inline-block pb-1"
+									>
+										The Problem
+									</h4>
+									<p class="text-sm leading-relaxed mb-4">
+										It was 2021. I was managing a team of 10 advocates. We were doing
+										"everything"—meetups, docs, videos, TikToks. We were exhausted.
+									</p>
+									<p class="text-sm leading-relaxed text-gray-600">
+										When leadership asked, "What is actually driving revenue?", I froze. I had
+										metrics (views, likes), but I didn't have <em>impact</em>. We were busy being
+										loud, not effective.
+									</p>
+								</div>
+								<div>
+									<h4
+										class="font-bold uppercase text-xs tracking-widest mb-4 border-b-2 border-black inline-block pb-1"
+									>
+										The Discovery
+									</h4>
+									<p class="text-sm leading-relaxed mb-4">
+										I stopped looking at content types and started looking at leverage. I realized
+										every task has a "Maintenance Cost" that we usually ignore.
+									</p>
+									<p class="text-sm leading-relaxed text-gray-600">
+										I scribbled the formula <code>(D × R × I) / M</code> on a napkin during a boring
+										QBR meeting. It changed how we worked forever.
+									</p>
+								</div>
+							</div>
+							<div class="mt-8 pt-8 border-t-2 border-black border-dashed">
+								<div
+									class="bg-[#fff9c4] border border-black p-4 relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transform rotate-1 hover:rotate-0 transition-transform"
+								>
+									<span
+										class="absolute -top-3 left-4 bg-white px-2 text-xs font-bold border border-black uppercase tracking-widest"
+										>Author's Note</span
+									>
+									<p class="text-sm font-medium font-mono text-gray-800 pt-2">
+										"I built DRIM because I wanted my team to stop burning out on low-impact work.
+										Use this tool to defend your time. It's the only non-renewable resource you
+										have."
+										<span class="block mt-2 text-right font-bold font-serif italic">- AC</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<!-- Footer -->
+			<footer
+				class="mt-32 pt-8 border-t border-black flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6"
+			>
+				<div class="flex flex-col sm:flex-row gap-8 text-sm font-bold flex-wrap">
+					<a
+						href="https://twitter.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit"
+						>Twitter</a
+					>
+					<a
+						href="https://github.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit"
+						>GitHub</a
+					>
+					<a
+						href="https://cal.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit"
+						>Office Hours</a
+					>
+					<a
+						href="https://opensource.org/licenses/MIT"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit"
+						>License</a
+					>
+					<a
+						href="#thumbnail"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit text-left"
+						>Thumbnail Generator</a
+					>
+					<a
+						href="#avatars"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit text-left"
+						>Avatar Gallery</a
+					>
+					<a
+						href="#stream-kit"
+						class="hover:bg-black hover:text-white px-1 transition-colors w-fit text-left"
+						>Stream Kit</a
+					>
+				</div>
+				<div class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+					copyright @ 2025
+				</div>
+			</footer>
+		</div>
+
+		<!-- Avatar Gallery (Full Screen Overlay) -->
+		<div id="page-avatars" class="fixed inset-0 z-[100] bg-gray-50 overflow-y-auto hidden">
+			<div class="p-8 pb-32 flex flex-col items-center">
+				<!-- Header -->
+				<div
+					class="w-full max-w-[1280px] mb-12 flex justify-between items-end border-b-2 border-black pb-6"
+				>
+					<div>
+						<h1 class="text-4xl font-bold mb-2">Avatar Gallery (100+)</h1>
+						<p class="text-gray-500 font-mono text-sm">
+							Procedurally generated. Minimal. Stoic. Professional.
+						</p>
+					</div>
+					<div class="flex gap-4">
+						<button
+							onclick="location.reload()"
+							class="bg-white border-2 border-black px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-gray-100"
+						>
+							Generate New
+						</button>
+						<a
+							href="#"
+							onclick="window.location.hash='#origin'; return false;"
+							class="bg-black text-white px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-gray-800"
+						>
+							← Back to App
+						</a>
+					</div>
+				</div>
+
+				<div
+					id="avatar-grid-container"
+					class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-[1440px]"
+				>
+					<!-- Avatars will be injected here by JS -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Stream Kit (Full Screen Overlay) -->
+		<div id="page-stream-kit" class="hidden fixed inset-0 z-[100] bg-gray-50 overflow-y-auto">
+			<div class="p-8 pb-32 flex flex-col items-center">
+				<!-- Header -->
+				<div class="w-full max-w-[1280px] mb-8 flex justify-between items-end">
+					<div>
+						<h1 class="text-4xl font-bold mb-2">Stream Kit</h1>
+						<p class="text-gray-500 font-mono text-sm">
+							Official broadcast assets. Screenshot to use.
+						</p>
+					</div>
+					<a
+						href="#"
+						onclick="window.location.hash='#origin'; return false;"
+						class="bg-black text-white px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-gray-800"
+					>
+						← Back to App
+					</a>
+				</div>
+
+				<!-- Asset 1: Channel Banner -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Asset 01: The Mainframe (Channel Banner)
+				</div>
+				<div
+					class="stream-banner-container bg-white relative flex items-center justify-between p-12 overflow-hidden"
+				>
+					<div
+						class="absolute inset-0 opacity-10"
+						style="
+							background-image:
+								linear-gradient(#000 1px, transparent 1px),
+								linear-gradient(90deg, #000 1px, transparent 1px);
+							background-size: 40px 40px;
+						"
+					></div>
+
+					<div class="relative z-10 flex items-center gap-8">
+						<div class="w-48 h-48 bg-white border-4 border-black p-2 shadow-[8px_8px_0px_0px_#000]">
+							<svg
+								viewBox="0 0 100 100"
+								class="w-full h-full"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<rect width="100" height="100" fill="white" />
+								<rect
+									x="20"
+									y="15"
+									width="60"
+									height="70"
+									fill="white"
+									stroke="black"
+									stroke-width="3"
+								/>
+								<path d="M20 15H80V35H20V15Z" fill="black" />
+								<rect
+									x="25"
+									y="45"
+									width="20"
+									height="10"
+									fill="white"
+									stroke="black"
+									stroke-width="2"
+								/>
+								<rect
+									x="55"
+									y="45"
+									width="20"
+									height="10"
+									fill="white"
+									stroke="black"
+									stroke-width="2"
+								/>
+								<line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="2" />
+								<rect x="32" y="48" width="4" height="4" fill="black" />
+								<rect x="62" y="48" width="4" height="4" fill="black" />
+								<rect
+									x="68"
+									y="65"
+									width="15"
+									height="5"
+									fill="#FACC15"
+									stroke="black"
+									stroke-width="1"
+									transform="rotate(-15 68 65)"
+								/>
+								<line x1="40" y1="75" x2="60" y2="75" stroke="black" stroke-width="2" />
+							</svg>
+						</div>
+						<div>
+							<h1 class="text-6xl font-black uppercase tracking-tight mb-2">Alex Chen</h1>
+							<div class="flex items-center gap-4">
+								<span class="bg-black text-white px-3 py-1 font-mono text-xl font-bold"
+									>DEVREL_ARCHITECT</span
+								>
+								<span class="font-mono text-gray-500 font-bold">// BUILDING DRIM</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="relative z-10 text-right space-y-2 font-mono font-bold text-xl">
+						<div class="flex items-center justify-end gap-3">
+							<span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+							<span>LIVE ON TUESDAYS</span>
+						</div>
+						<div class="text-gray-400">@architect_alex</div>
+						<div class="text-gray-400">github.com/drim</div>
+					</div>
+
+					<!-- Decorative Tape -->
+					<div
+						class="absolute -right-12 top-12 bg-yellow-400 w-64 h-12 border-y-4 border-black transform rotate-45 flex items-center justify-center overflow-hidden"
+					>
+						<div
+							class="animate-marquee whitespace-nowrap font-bold uppercase text-xs tracking-widest"
+						>
+							system override // system override
+						</div>
+					</div>
+				</div>
+
+				<!-- Asset 2: Starting Soon -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Asset 02: Boot Sequence (Starting Soon)
+				</div>
+				<div
+					class="stream-screen-container bg-black relative flex flex-col justify-center items-center font-mono text-green-500 p-16"
+				>
+					<!-- CRT Scanline Effect -->
+					<div
+						class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] pointer-events-none z-20"
+					></div>
+
+					<div
+						class="w-full max-w-4xl border border-green-800 p-8 bg-black z-10 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+					>
+						<div
+							class="flex justify-between border-b border-green-800 pb-4 mb-4 text-xs uppercase tracking-widest"
+						>
+							<span>Stream_OS v2.0</span>
+							<span>Status: Loading Modules...</span>
+						</div>
+						<div class="space-y-2 text-lg mb-8">
+							<div>> initializing_core_protocols... <span class="text-white">OK</span></div>
+							<div>> loading_assets... <span class="text-white">OK</span></div>
+							<div>> checking_microphone... <span class="text-white">OK</span></div>
+							<div>> establishing_uplink... <span class="animate-pulse">PENDING</span></div>
+						</div>
+
+						<div class="w-full bg-green-900/30 h-4 mb-2">
+							<div class="h-full bg-green-500 w-[65%] relative overflow-hidden">
+								<div
+									class="absolute inset-0 bg-white/20 w-full animate-[shimmer_2s_infinite]"
+								></div>
+							</div>
+						</div>
+						<div class="flex justify-between text-xs">
+							<span>Progress: 65%</span>
+							<span class="animate-blink">_</span>
+						</div>
+					</div>
+
+					<div class="absolute bottom-16 text-center">
+						<h2 class="text-4xl font-bold text-white mb-2">STARTING SOON</h2>
+						<p class="text-gray-500 text-sm uppercase tracking-[0.5em]">Stand By</p>
+					</div>
+				</div>
+
+				<!-- Asset 3: BRB -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Asset 03: Maintenance Mode (BRB)
+				</div>
+				<div
+					class="stream-screen-container bg-yellow-400 relative flex flex-col justify-center items-center overflow-hidden"
+				>
+					<!-- Hazard Stripes Background -->
+					<div class="absolute inset-0 flex" style="transform: rotate(-5deg) scale(1.2)">
+						<div
+							class="w-full h-full"
+							style="
+								background: repeating-linear-gradient(
+									90deg,
+									#facc15,
+									#facc15 100px,
+									#000 100px,
+									#000 200px
+								);
+							"
+						></div>
+					</div>
+
+					<div
+						class="relative z-10 bg-white border-8 border-black p-16 text-center shadow-[30px_30px_0px_0px_#000]"
+					>
+						<div class="text-9xl font-black mb-4 leading-none">AFK</div>
+						<div
+							class="text-3xl font-bold uppercase tracking-widest bg-black text-white inline-block px-4 py-2 mb-8"
+						>
+							Maintenance Mode
+						</div>
+						<p class="font-mono text-xl font-bold text-gray-500">
+							The architect is recompiling caffeine.
+						</p>
+						<p class="font-mono text-xl font-bold text-gray-500 mt-2">Back in 5 minutes.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Thumbnail Generator View (Full Screen Overlay with Scroll) -->
+		<div id="page-thumbnail" class="hidden fixed inset-0 z-[100] bg-gray-50 overflow-y-auto">
+			<div class="p-8 pb-32 flex flex-col items-center">
+				<!-- Header -->
+				<div class="w-full max-w-[1280px] mb-8 flex justify-between items-end">
+					<div>
+						<h1 class="text-4xl font-bold mb-2">Thumbnail Generator</h1>
+						<p class="text-gray-500 font-mono text-sm">Select a style, screenshot it, ship it.</p>
+					</div>
+					<a
+						href="#"
+						onclick="window.location.hash='#origin'; return false;"
+						class="bg-black text-white px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-gray-800"
+					>
+						← Back to App
+					</a>
+				</div>
+
+				<!-- OPTION 1: THE BLUEPRINT -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 01: The Blueprint
+				</div>
+				<div
+					class="thumbnail-container bg-white relative overflow-hidden"
+					style="
+						background-image: radial-gradient(#e5e7eb 2px, transparent 2px);
+						background-size: 40px 40px;
+					"
+				>
+					<div class="absolute top-0 left-0 w-full h-4 bg-black"></div>
+					<div class="absolute top-8 left-8 w-6 h-6 border-l-4 border-t-4 border-black"></div>
+					<div class="absolute top-8 right-8 w-6 h-6 border-r-4 border-t-4 border-black"></div>
+					<div class="absolute bottom-8 left-8 w-6 h-6 border-l-4 border-b-4 border-black"></div>
+					<div class="absolute bottom-8 right-8 w-6 h-6 border-r-4 border-b-4 border-black"></div>
+
+					<div class="absolute inset-0 flex flex-col p-16">
+						<div class="flex justify-between items-start mb-16">
+							<div>
+								<div
+									class="bg-black text-white px-4 py-1 text-2xl font-bold font-mono tracking-widest inline-block mb-2"
+								>
+									DRIM v1.0
+								</div>
+								<div class="text-gray-500 font-bold tracking-widest uppercase text-lg">
+									DevRel Impact Model
+								</div>
+							</div>
+							<div class="text-right">
+								<div
+									class="bg-yellow-400 border-2 border-black px-6 py-2 transform rotate-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+								>
+									<span class="text-2xl font-bold uppercase tracking-widest">Stop Guessing</span>
+								</div>
+							</div>
+						</div>
+						<div class="flex-1 flex items-center gap-16">
+							<div class="flex-1">
+								<div class="text-8xl font-black tracking-tighter leading-none mb-8">
+									ROI<br />SOLVED
+								</div>
+								<div
+									class="flex items-center gap-4 text-3xl font-mono text-gray-400 font-bold border-t-4 border-black pt-8"
+								>
+									<span>(D × R × I)</span><span class="text-5xl">/</span><span>M</span>
+								</div>
+							</div>
+							<div
+								class="w-[500px] bg-white border-4 border-black p-8 shadow-[24px_24px_0px_0px_rgba(0,0,0,1)] relative"
+							>
+								<div
+									class="absolute -top-6 -right-6 w-32 h-32 bg-red-600 rounded-full flex items-center justify-center border-4 border-white shadow-lg transform rotate-12 z-10 opacity-90"
+								>
+									<span
+										class="text-white font-bold text-xl uppercase text-center leading-tight transform -rotate-12"
+										>Critical<br />Priority</span
+									>
+								</div>
+								<div class="space-y-6 opacity-40 blur-[1px]">
+									<div class="h-4 bg-gray-200 w-3/4"></div>
+									<div class="h-4 bg-gray-200 w-1/2"></div>
+									<div class="h-4 bg-gray-200 w-full"></div>
+								</div>
+								<div class="mt-8 pt-8 border-t-4 border-black">
+									<div class="flex justify-between items-end">
+										<span class="text-xl font-bold uppercase text-gray-500">Total Score</span>
+										<span class="text-8xl font-black tracking-tighter leading-none">92.5</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 2: HIGH VOLTAGE -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 02: High Voltage
+				</div>
+				<div
+					class="thumbnail-container bg-yellow-400 relative overflow-hidden flex flex-col justify-center items-center"
+				>
+					<!-- Hazard Stripes -->
+					<div class="absolute top-0 w-full h-16 bg-black flex overflow-hidden">
+						<div
+							class="w-[200%] h-full flex animate-none"
+							style="
+								background: repeating-linear-gradient(
+									45deg,
+									#000,
+									#000 20px,
+									#facc15 20px,
+									#facc15 40px
+								);
+							"
+						></div>
+					</div>
+					<div class="absolute bottom-0 w-full h-16 bg-black flex overflow-hidden">
+						<div
+							class="w-[200%] h-full flex animate-none"
+							style="
+								background: repeating-linear-gradient(
+									45deg,
+									#000,
+									#000 20px,
+									#facc15 20px,
+									#facc15 40px
+								);
+							"
+						></div>
+					</div>
+
+					<div
+						class="bg-white border-4 border-black p-12 shadow-[20px_20px_0px_0px_#000] max-w-4xl text-center transform -rotate-2"
+					>
+						<div class="text-black font-black text-9xl leading-none mb-4">
+							STOP<br />WASTING<br />TIME
+						</div>
+						<div
+							class="text-2xl font-mono font-bold uppercase tracking-widest bg-black text-white inline-block px-4 py-2"
+						>
+							The DRIM Framework
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 3: DARK MATTER -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 03: Dark Matter
+				</div>
+				<div
+					class="thumbnail-container bg-black relative overflow-hidden text-white flex items-center p-24"
+				>
+					<div class="absolute right-0 top-0 bottom-0 w-1/3 bg-white"></div>
+
+					<div class="relative z-10 w-full flex justify-between items-center">
+						<div class="flex-1">
+							<div class="text-yellow-400 font-mono text-xl mb-4">// CALCULATE_IMPACT</div>
+							<div class="text-8xl font-bold tracking-tighter leading-tight mb-8">
+								DEVREL<br />IS NOT<br />MAGIC.
+							</div>
+							<div class="flex gap-4">
+								<div class="border border-white/30 px-4 py-2 text-sm font-mono text-gray-400">
+									INPUT: EFFORT
+								</div>
+								<div class="border border-white/30 px-4 py-2 text-sm font-mono text-gray-400">
+									OUTPUT: ROI
+								</div>
+							</div>
+						</div>
+						<div
+							class="w-[400px] h-[400px] bg-black border-4 border-black flex items-center justify-center relative"
+						>
+							<!-- Yellow Circle -->
+							<div
+								class="w-64 h-64 bg-yellow-400 rounded-full flex flex-col items-center justify-center text-black shadow-[10px_10px_0px_0px_rgba(0,0,0,0.2)]"
+							>
+								<span class="text-lg font-bold uppercase">Score</span>
+								<span class="text-7xl font-black">98</span>
+							</div>
+							<div
+								class="absolute bottom-10 -left-10 bg-white text-black px-6 py-3 font-bold font-mono text-xl shadow-[4px_4px_0px_0px_#000]"
+							>
+								PRIORITY: HIGH
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 4: THE EQUATION -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 04: The Equation
+				</div>
+				<div class="thumbnail-container bg-gray-100 flex items-center justify-center relative">
+					<div
+						class="absolute inset-0 opacity-5"
+						style="
+							background-image:
+								linear-gradient(#000 1px, transparent 1px),
+								linear-gradient(90deg, #000 1px, transparent 1px);
+							background-size: 50px 50px;
+						"
+					></div>
+
+					<div class="text-center">
+						<div
+							class="inline-block bg-black text-white px-4 py-2 font-mono text-xl font-bold mb-8"
+						>
+							THE FORMULA
+						</div>
+						<div class="text-[180px] font-black leading-none font-mono tracking-tighter mb-4">
+							(D×R×I)<span class="text-gray-300">/</span>M
+						</div>
+						<div
+							class="flex justify-center gap-16 text-3xl font-bold text-gray-500 uppercase tracking-widest mt-12"
+						>
+							<span>Demand</span>
+							<span>Reach</span>
+							<span>Impact</span>
+							<span class="text-red-500 line-through decoration-4">Vibes</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 5: SWISS GRID -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 05: Swiss Grid
+				</div>
+				<div class="thumbnail-container bg-white grid grid-cols-2">
+					<div class="border-r-4 border-black p-16 flex flex-col justify-between">
+						<div class="text-8xl font-bold leading-none tracking-tighter">
+							PRIOR<br />ITIZE<br />LIKE A<br />ROBOT
+						</div>
+						<div class="font-mono text-sm">
+							FIG 1.0 — RESOURCE ALLOCATION<br />
+							EST. SAVINGS: 40HRS/WEEK
+						</div>
+					</div>
+					<div class="grid grid-rows-2">
+						<div
+							class="bg-black text-white p-16 flex flex-col justify-center border-b-4 border-white"
+						>
+							<div class="text-yellow-400 font-mono mb-2">TARGET METRIC</div>
+							<div class="text-7xl font-bold">+240%</div>
+							<div class="text-gray-400 mt-2">Efficiency Gain</div>
+						</div>
+						<div class="bg-gray-100 p-16 flex items-center justify-center relative overflow-hidden">
+							<div
+								class="absolute inset-0 flex items-center justify-center opacity-10 transform -rotate-12 scale-150 font-black text-9xl"
+							>
+								DRIM DRIM DRIM
+							</div>
+							<div
+								class="relative z-10 border-4 border-black bg-white px-8 py-4 font-bold text-3xl shadow-[8px_8px_0px_0px_#000]"
+							>
+								Start Calculator →
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 6: THE MANIFESTO -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 06: The Manifesto
+				</div>
+				<div
+					class="thumbnail-container bg-white relative flex flex-col justify-center items-center overflow-hidden"
+				>
+					<div
+						class="absolute inset-0 leading-none font-black text-[200px] text-gray-100 whitespace-nowrap opacity-50 select-none"
+						style="writing-mode: vertical-lr"
+					>
+						NO MORE VIBES NO MORE VIBES
+					</div>
+
+					<div class="relative z-10 text-center">
+						<div
+							class="bg-red-600 text-white font-black text-9xl px-12 py-4 transform -rotate-3 inline-block shadow-2xl mb-4"
+						>
+							DEATH
+						</div>
+						<br />
+						<div
+							class="bg-black text-white font-black text-9xl px-12 py-4 transform rotate-1 inline-block shadow-2xl"
+						>
+							TO VIBES
+						</div>
+					</div>
+
+					<div
+						class="absolute bottom-12 font-mono font-bold text-xl bg-yellow-400 px-4 py-1 border border-black"
+					>
+						THE DRIM FRAMEWORK EXPLAINED
+					</div>
+				</div>
+
+				<!-- OPTION 7: SYSTEM ALERT -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 07: System Alert
+				</div>
+				<div class="thumbnail-container bg-[#f0f0f0] flex items-center justify-center p-20">
+					<div
+						class="w-full h-full bg-white border-4 border-black shadow-[20px_20px_0px_0px_#000] flex flex-col"
+					>
+						<div
+							class="bg-black text-white px-6 py-4 flex justify-between items-center font-mono font-bold text-xl"
+						>
+							<span>SYSTEM_ALERT</span>
+							<span>X</span>
+						</div>
+						<div class="flex-1 p-12 flex flex-col justify-center items-center text-center">
+							<div
+								class="w-32 h-32 border-4 border-black rounded-full flex items-center justify-center text-6xl font-bold mb-8"
+							>
+								!
+							</div>
+							<div class="text-6xl font-bold mb-6">Strategy Not Found</div>
+							<p class="font-mono text-gray-500 text-2xl max-w-2xl">
+								Your team is operating at 100% capacity with 0% clarity. Initiate protocol DRIM
+								immediately.
+							</p>
+							<div class="mt-12 flex gap-6">
+								<div
+									class="bg-black text-white px-8 py-3 font-bold text-2xl uppercase border-2 border-black"
+								>
+									Ignore
+								</div>
+								<div
+									class="bg-yellow-400 text-black px-8 py-3 font-bold text-2xl uppercase border-2 border-black shadow-[4px_4px_0px_0px_#000]"
+								>
+									Fix It
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 8: THE ARCHITECT -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 08: The Architect
+				</div>
+				<div
+					class="thumbnail-container bg-white flex items-center p-24 gap-16 border-t-[16px] border-b-[16px] border-black"
+				>
+					<div class="flex-1">
+						<div
+							class="inline-block bg-yellow-400 px-4 py-1 font-bold uppercase tracking-widest mb-6 border border-black"
+						>
+							DevRel Strategy
+						</div>
+						<h2 class="text-8xl font-black leading-tight mb-8">"STOP<br />JUST<br />GUESSING."</h2>
+						<div class="text-gray-500 font-mono text-2xl border-l-4 border-black pl-6 py-2">
+							How I prioritize work without loosing my mind.
+						</div>
+					</div>
+					<div class="w-[500px] h-[500px] relative">
+						<div
+							class="absolute inset-0 bg-gray-200 border-4 border-black transform translate-x-4 translate-y-4"
+						></div>
+						<div
+							class="absolute inset-0 bg-white border-4 border-black flex items-center justify-center"
+						>
+							<!-- Large Avatar -->
+							<svg
+								viewBox="0 0 100 100"
+								class="w-full h-full"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<rect width="100" height="100" fill="white" />
+								<rect
+									x="20"
+									y="15"
+									width="60"
+									height="70"
+									fill="white"
+									stroke="black"
+									stroke-width="2"
+								/>
+								<path d="M20 15H80V35H20V15Z" fill="black" />
+								<rect
+									x="25"
+									y="45"
+									width="20"
+									height="10"
+									fill="white"
+									stroke="black"
+									stroke-width="2"
+								/>
+								<rect
+									x="55"
+									y="45"
+									width="20"
+									height="10"
+									fill="white"
+									stroke="black"
+									stroke-width="2"
+								/>
+								<line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="2" />
+								<rect x="32" y="48" width="4" height="4" fill="black" />
+								<rect x="62" y="48" width="4" height="4" fill="black" />
+								<rect
+									x="68"
+									y="65"
+									width="15"
+									height="5"
+									fill="#FACC15"
+									stroke="black"
+									stroke-width="1"
+									transform="rotate(-15 68 65)"
+								/>
+								<line x1="40" y1="75" x2="60" y2="75" stroke="black" stroke-width="2" />
+							</svg>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 9: THE SCORECARD -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 09: The Scorecard
+				</div>
+				<div
+					class="thumbnail-container bg-white flex flex-col justify-center items-center relative"
+				>
+					<div class="absolute top-0 w-full h-8 bg-black"></div>
+
+					<div class="flex items-center gap-12 scale-110">
+						<div class="text-right">
+							<div class="text-3xl font-bold text-gray-400 uppercase">Q3 Hackathon</div>
+							<div class="text-xl font-mono text-gray-300">Est: 40hrs</div>
+						</div>
+
+						<div
+							class="w-[400px] bg-white border-4 border-black p-8 shadow-[12px_12px_0px_0px_#000]"
+						>
+							<div class="flex justify-between border-b-2 border-black pb-4 mb-4">
+								<span class="font-bold uppercase">Impact</span>
+								<span class="font-bold">9/10</span>
+							</div>
+							<div class="flex justify-between border-b-2 border-black pb-4 mb-4">
+								<span class="font-bold uppercase">Reach</span>
+								<span class="font-bold">8/10</span>
+							</div>
+							<div class="flex justify-between pb-2">
+								<span class="font-bold uppercase text-gray-400">Maintenence</span>
+								<span class="font-bold text-red-500">2/10</span>
+							</div>
+							<div class="mt-8 bg-black text-white text-center py-4">
+								<span class="block text-xs uppercase tracking-widest mb-1 text-gray-400"
+									>Final Score</span
+								>
+								<span class="text-6xl font-black text-yellow-400">36.0</span>
+							</div>
+						</div>
+
+						<div class="text-left">
+							<div class="text-6xl font-black mb-2">PASS<br />OR<br />FAIL?</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OPTION 10: REDACTED -->
+				<div
+					class="mb-4 font-bold text-xs uppercase tracking-widest text-gray-400 w-full max-w-[1280px]"
+				>
+					Option 10: Redacted
+				</div>
+				<div class="thumbnail-container bg-[#e3e3e3] p-16 flex items-center justify-center">
+					<div class="bg-white w-full h-full p-16 shadow-2xl relative rotate-1">
+						<div
+							class="absolute top-8 right-8 border-4 border-red-600 text-red-600 px-4 py-2 text-2xl font-black uppercase tracking-widest transform rotate-12 opacity-50"
+						>
+							Confidential
+						</div>
+
+						<div class="max-w-3xl">
+							<h1 class="text-6xl font-bold mb-8">
+								THE <span class="bg-black text-white px-2">SECRET</span> TO<br />SCALING DEVREL
+							</h1>
+							<div class="space-y-4 text-gray-400 font-mono text-xl">
+								<p>
+									Most teams focus on
+									<span class="bg-black text-black select-none">content creation</span>.
+								</p>
+								<p>
+									But the real growth comes from
+									<span class="bg-black text-black select-none">systematic leverage</span>.
+								</p>
+								<p>
+									Here is the exact model I used to
+									<span class="bg-black text-black select-none">double impact</span>.
+								</p>
+							</div>
+							<div class="mt-12">
+								<span class="text-8xl font-black border-b-8 border-yellow-400 inline-block"
+									>DRIM</span
+								>
+							</div>
+						</div>
+
+						<!-- Paperclip -->
+						<div
+							class="absolute -top-4 left-1/2 w-8 h-20 border-4 border-gray-400 rounded-full bg-transparent"
+						></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Visitor Counter -->
+		<div id="visitor-counter" class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50">
+			<div
+				class="bg-white border border-black px-3 py-2 sm:px-4 sm:py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-xs font-bold font-mono flex items-center gap-3 hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-default select-none"
+			>
+				<span class="relative flex h-2 w-2">
+					<span
+						class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+					></span>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+				</span>
+				<span id="visitor-count-text">... Visitors</span>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				// --- Navigation Logic ---
+				const appContainer = document.getElementById('app-container');
+				const thumbnailPage = document.getElementById('page-thumbnail');
+				const avatarsPage = document.getElementById('page-avatars');
+				const streamKitPage = document.getElementById('page-stream-kit');
+				const visitorCounter = document.getElementById('visitor-counter');
+				const sections = document.querySelectorAll('.page-section');
+				const navLinks = document.querySelectorAll('.nav-link');
+				const subNavSolution = document.getElementById('nav-solution-children');
+
+				function handleHashChange() {
+					const hash = window.location.hash || '#problem';
+					const path = hash.substring(1); // e.g. 'problem', 'solution/variables'
+
+					// 1. Reset specific views
+					thumbnailPage.classList.add('hidden');
+					avatarsPage.classList.add('hidden');
+					streamKitPage.classList.add('hidden');
+					appContainer.classList.remove('hidden');
+					visitorCounter.classList.remove('hidden');
+
+					// 2. Handle Special Full-Screen Pages
+					if (path === 'thumbnail') {
+						appContainer.classList.add('hidden');
+						visitorCounter.classList.add('hidden');
+						thumbnailPage.classList.remove('hidden');
+						window.scrollTo(0, 0);
+						return;
+					}
+					if (path === 'avatars') {
+						appContainer.classList.add('hidden');
+						visitorCounter.classList.add('hidden');
+						avatarsPage.classList.remove('hidden');
+						window.scrollTo(0, 0);
+						// Trigger generator if empty
+						if (document.getElementById('avatar-grid-container').children.length === 0) {
+							generateAvatars();
+						}
+						return;
+					}
+					if (path === 'stream-kit') {
+						appContainer.classList.add('hidden');
+						visitorCounter.classList.add('hidden');
+						streamKitPage.classList.remove('hidden');
+						window.scrollTo(0, 0);
+						return;
+					}
+
+					// 3. Normal App Routing
+					sections.forEach((s) => s.classList.add('hidden'));
+
+					// Determine Page ID
+					let pageId = 'page-' + path.replace('/', '-');
+					// Handle base solution route
+					if (path === 'solution') pageId = 'page-solution';
+
+					const target = document.getElementById(pageId);
+					if (target) {
+						target.classList.remove('hidden');
+					} else {
+						// Default to problem if not found
+						document.getElementById('page-problem').classList.remove('hidden');
+					}
+
+					// 4. Update Sidebar Active States
+					updateSidebar(path);
+
+					window.scrollTo(0, 0);
+				}
+
+				function updateSidebar(currentPath) {
+					// Reset All
+					navLinks.forEach((link) => {
+						link.classList.remove('opacity-100');
+						link.classList.add('opacity-40');
+						const text = link.querySelector('.nav-text');
+						text.classList.remove('border-black', 'pb-0.5');
+						text.classList.add('border-transparent');
+					});
+
+					// Hide Subnav by default
+					subNavSolution.classList.add('hidden');
+
+					// Find active link
+					// Simple matching: if currentPath starts with link data-path
+					let activeLink = null;
+					navLinks.forEach((link) => {
+						const linkPath = link.getAttribute('data-path');
+						if (
+							currentPath === linkPath ||
+							(linkPath !== 'problem' && currentPath.startsWith(linkPath))
+						) {
+							activeLink = link;
+						}
+					});
+
+					if (activeLink) {
+						activeLink.classList.remove('opacity-40');
+						activeLink.classList.add('opacity-100');
+						const text = activeLink.querySelector('.nav-text');
+						text.classList.remove('border-transparent');
+						text.classList.add('border-black', 'pb-0.5');
+
+						// Show subnav if we are in solution section
+						if (activeLink.getAttribute('data-path') === 'solution') {
+							subNavSolution.classList.remove('hidden');
+							// Highlight sub-items
+							const subLinks = subNavSolution.querySelectorAll('.sub-nav-link');
+							subLinks.forEach((sub) => {
+								if (sub.getAttribute('data-path') === currentPath) {
+									sub.classList.remove('text-gray-400');
+									sub.classList.add('text-black');
+								} else {
+									sub.classList.add('text-gray-400');
+									sub.classList.remove('text-black');
+								}
+							});
+						}
+					}
+				}
+
+				window.addEventListener('hashchange', handleHashChange);
+				handleHashChange(); // Init
+
+				// --- Construction Template Logic ---
+				const constructionZones = document.querySelectorAll('.construction-zone');
+				constructionZones.forEach((zone) => {
+					const title = zone.getAttribute('data-title');
+					zone.innerHTML = `
+                    <h2 class="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">Status: Drafting</h2>
+                    <div class="border-2 border-black bg-yellow-400 p-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                        <div class="border border-black bg-yellow-400 relative overflow-hidden p-8 sm:p-12">
+                            <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 10px, transparent 10px, transparent 20px)"></div>
+                            <div class="relative z-10 text-center">
+                                <div class="inline-block border-2 border-black bg-black text-yellow-400 font-bold px-4 py-2 text-xl mb-6 uppercase tracking-widest">Under Construction</div>
+                                <h3 class="text-4xl sm:text-5xl font-bold mb-4 text-black uppercase leading-none">\${title}</h3>
+                                <p class="font-mono text-sm font-bold text-black/80 max-w-md mx-auto mb-8 border-y-2 border-black py-4">// WARNING: The architects are currently compiling this module. <br/>Please check back in a future deployment.</p>
+                                <div class="flex justify-center gap-2">
+                                    <div class="w-3 h-3 bg-black rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                                    <div class="w-3 h-3 bg-black rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                    <div class="w-3 h-3 bg-black rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-between items-center border-t border-dashed border-gray-300 pt-4 font-mono text-[10px] text-gray-400 uppercase">
+                        <span>Job Ticket: #9283</span>
+                        <span>Est. Completion: Q4 2025</span>
+                    </div>
+                `;
+				});
+
+				// --- Calculator Logic ---
+				const ranges = ['demand', 'reach', 'impact', 'maintenance'];
+				const scoreEl = document.getElementById('final-score');
+
+				function updateCalculator() {
+					const d = parseInt(document.getElementById('demand').value);
+					const r = parseInt(document.getElementById('reach').value);
+					const i = parseInt(document.getElementById('impact').value);
+					const m = parseInt(document.getElementById('maintenance').value);
+
+					// Update span values
+					document.getElementById('val-demand').innerText = d;
+					document.getElementById('val-reach').innerText = r;
+					document.getElementById('val-impact').innerText = i;
+					document.getElementById('val-maintenance').innerText = m;
+
+					// Calculate Score
+					const score = (d * r * i) / m;
+					scoreEl.innerText = score.toFixed(1);
+				}
+
+				ranges.forEach((id) => {
+					document.getElementById(id).addEventListener('input', updateCalculator);
+				});
+
+				// --- Visitor Counter Logic ---
+				const count = Math.floor(Math.random() * (15000 - 12000 + 1) + 12000);
+				document.getElementById('visitor-count-text').innerText =
+					count.toLocaleString() + ' Visitors';
+			});
+
+			// --- Avatar Generator Logic ---
+			function generateAvatars() {
+				const container = document.getElementById('avatar-grid-container');
+				container.innerHTML = ''; // Clear existing
+
+				const parts = {
+					bases: [
+						'<rect x="25" y="20" width="50" height="60" stroke="black" stroke-width="4" fill="white"/>',
+						'<path d="M25 20H75V50L50 75L25 50V20Z" stroke="black" stroke-width="4" fill="white"/>',
+						'<rect x="20" y="25" width="60" height="50" stroke="black" stroke-width="4" fill="white"/>',
+						'<path d="M25 30V80H75V30" stroke="black" stroke-width="4" fill="white"/>'
+					],
+					tops: [
+						'<rect x="20" y="15" width="60" height="15" fill="black"/>',
+						'<path d="M25 30L20 10L40 30H60L80 10L75 30" fill="black"/>',
+						'',
+						'<path d="M25 20H75V30H25V20Z" fill="black"/>',
+						'<rect x="15" y="15" width="70" height="5" fill="black"/><rect x="30" y="5" width="40" height="10" fill="black"/>'
+					],
+					eyes: [
+						'<rect x="35" y="45" width="6" height="6" fill="black"/><rect x="59" y="45" width="6" height="6" fill="black"/>',
+						'<rect x="25" y="42" width="50" height="8" fill="black"/>',
+						'<rect x="30" y="42" width="15" height="8" stroke="black" stroke-width="2"/><rect x="55" y="42" width="15" height="8" stroke="black" stroke-width="2"/><line x1="45" y1="46" x2="55" y2="46" stroke="black" stroke-width="2"/>',
+						'<line x1="30" y1="40" x2="45" y2="48" stroke="black" stroke-width="3"/><line x1="70" y1="40" x2="55" y2="48" stroke="black" stroke-width="3"/><circle cx="40" cy="50" r="3" fill="black"/><circle cx="60" cy="50" r="3" fill="black"/>',
+						'<line x1="35" y1="45" x2="45" y2="45" stroke="black" stroke-width="3"/><line x1="55" y1="45" x2="65" y2="45" stroke="black" stroke-width="3"/>'
+					],
+					mouths: [
+						'<line x1="40" y1="70" x2="60" y2="70" stroke="black" stroke-width="3"/>',
+						'<path d="M40 75 Q50 70 60 75" stroke="black" stroke-width="3" fill="none"/>',
+						'<rect x="35" y="65" width="30" height="15" fill="white" stroke="black" stroke-width="2"/><line x1="45" y1="65" x2="45" y2="80" stroke="black" stroke-width="2"/><line x1="55" y1="65" x2="55" y2="80" stroke="black" stroke-width="2"/>',
+						'<line x1="45" y1="70" x2="55" y2="70" stroke="black" stroke-width="3"/><line x1="52" y1="70" x2="65" y2="80" stroke="black" stroke-width="2"/>'
+					],
+					accents: [
+						'<rect x="65" y="55" width="12" height="6" fill="#FACC15" stroke="black" stroke-width="1" transform="rotate(-15 65 55)"/>',
+						'<rect x="30" y="40" width="40" height="5" fill="#FACC15" stroke="black" stroke-width="1" opacity="0.5"/>',
+						'<line x1="30" y1="30" x2="35" y2="40" stroke="black" stroke-width="1"/>',
+						'',
+						'<circle cx="50" cy="30" r="3" fill="#FACC15" stroke="black" stroke-width="1"/>'
+					]
+				};
+
+				// How many to create (you asked for 30, set to desired number)
+				const total = 100;
+
+				for (let i = 1; i <= total; i++) {
+					const base = parts.bases[Math.floor(Math.random() * parts.bases.length)];
+					const top = parts.tops[Math.floor(Math.random() * parts.tops.length)];
+					const eye = parts.eyes[Math.floor(Math.random() * parts.eyes.length)];
+					const mouth = parts.mouths[Math.floor(Math.random() * parts.mouths.length)];
+					const accent =
+						Math.random() > 0.6
+							? parts.accents[Math.floor(Math.random() * parts.accents.length)]
+							: '';
+
+					const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" class="avatar-svg">
+            <rect width="100" height="100" fill="white"/>
+            ${base}
+            ${top}
+            ${eye}
+            ${mouth}
+            ${accent}
+        </svg>`;
+
+					const card = document.createElement('div');
+					card.className =
+						'bg-white border-2 border-black p-4 flex flex-col items-center hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-shadow';
+					card.innerHTML = `
+            <div class="w-32 h-32 border-2 border-black mb-4 flex items-center justify-center">${svgContent}</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Generated #${i.toString().padStart(3, '0')}</div>
+            <div class="flex gap-2">
+                <button class="download-btn px-3 py-1 text-xs font-bold border border-black">Download PNG</button>
+                <button class="download-svg-btn px-3 py-1 text-xs font-bold border border-black">Download SVG</button>
+            </div>
+        `;
+
+					// Append card first so DOM references exist
+					container.appendChild(card);
+
+					// Hook up download button:
+					const pngBtn = card.querySelector('.download-btn');
+					const svgBtn = card.querySelector('.download-svg-btn');
+
+					// PNG download click: convert inner svg to 36x36 PNG and trigger download
+					pngBtn.addEventListener('click', async () => {
+						const svgEl = card.querySelector('svg.avatar-svg');
+						if (!svgEl) return alert('SVG not found');
+
+						// Convert to PNG and download
+						try {
+							const filename = `avatar_${String(i).padStart(3, '0')}.png`;
+							await downloadSvgAsPng(svgEl, filename, 36, 36);
+						} catch (err) {
+							console.error('Export error', err);
+							alert('Failed to export PNG: ' + err.message);
+						}
+					});
+
+					// Also allow direct SVG download if needed
+					svgBtn.addEventListener('click', () => {
+						const svgEl = card.querySelector('svg.avatar-svg');
+						const svgStr = new XMLSerializer().serializeToString(svgEl);
+						const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+						const url = URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.href = url;
+						a.download = `avatar_${String(i).padStart(3, '0')}.svg`;
+						document.body.appendChild(a);
+						a.click();
+						a.remove();
+						URL.revokeObjectURL(url);
+					});
+				}
+			}
+
+			/**
+			 * Convert an inline SVG element to a PNG and trigger download.
+			 * svgElement: DOM SVG element
+			 * filename: string
+			 * w, h: desired pixel size of output PNG
+			 */
+			async function downloadSvgAsPng(svgElement, filename, w = 36, h = 36) {
+				// Clone svg to avoid mutating original
+				const clone = svgElement.cloneNode(true);
+
+				// Ensure width/height attributes on the clone for consistent rasterizing
+				clone.setAttribute('width', '100');
+				clone.setAttribute('height', '100');
+				clone.setAttribute('viewBox', svgElement.getAttribute('viewBox') || '0 0 100 100');
+
+				// Inline all computed styles (simple approach — good for stroke/fill)
+				// Create wrapper to serialize
+				const wrapper = document.createElement('div');
+				wrapper.appendChild(clone);
+
+				const svgStr = new XMLSerializer().serializeToString(clone);
+				const svgBlob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+				const url = URL.createObjectURL(svgBlob);
+
+				// Create an image to draw onto canvas
+				const img = new Image();
+				// Important for cross-origin SVGs; using data URL from blob keeps it same-origin
+				img.src = url;
+
+				await new Promise((resolve, reject) => {
+					img.onload = () => resolve();
+					img.onerror = (e) => reject(new Error('Failed to load SVG image for rasterization'));
+				});
+
+				// Create canvas of desired size
+				const canvas = document.createElement('canvas');
+				canvas.width = w;
+				canvas.height = h;
+				const ctx = canvas.getContext('2d');
+
+				// OPTIONAL: fill white background instead of transparent
+				// ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h);
+
+				// Draw image scaled from 100x100 -> w x h
+				ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h);
+
+				// Create PNG data URL and trigger download
+				canvas.toBlob((blob) => {
+					const link = document.createElement('a');
+					const url2 = URL.createObjectURL(blob);
+					link.href = url2;
+					link.download = filename;
+					document.body.appendChild(link);
+					link.click();
+					link.remove();
+					URL.revokeObjectURL(url2);
+					URL.revokeObjectURL(url);
+				}, 'image/png');
+			}
+		</script>
+	</body>
+</html>

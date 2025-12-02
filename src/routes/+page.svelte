@@ -1,7 +1,15 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 </script>
 
 <section class="max-w-4xl mx-auto p-8 space-y-8">
+	<div class="text-center">
+		<a
+			href={resolve('/demo')}
+			class="text-2xl underline hover:bg-black hover:text-white hover:no-underline">Demo</a
+		>
+	</div>
+
 	<div class="w-full aspect-video bg-white border-4 border-black relative overflow-hidden">
 		<div class="grid grid-cols-3 h-full">
 			<div
