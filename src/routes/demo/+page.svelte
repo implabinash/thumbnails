@@ -3,15 +3,6 @@
 	import * as htmlToImage from 'html-to-image';
 
 	let thumbnailEl: HTMLElement | null = null;
-	let timer = $state(1111111);
-
-	$effect(() => {
-		if (timer >= 0) {
-			setTimeout(() => {
-				timer -= 1;
-			}, 1000);
-		}
-	});
 
 	async function downloadThumbnail() {
 		if (!thumbnailEl) return;
@@ -46,31 +37,36 @@
 		bind:this={thumbnailEl}
 		class="w-full aspect-video bg-white border-4 border-black relative overflow-hidden"
 	>
-		<div class="absolute top-6 left-6 text-gray-500 text-base">[ FIRST STREAM ]</div>
-
-		<div class="absolute top-6 right-6 bg-red-500 text-white px-4 py-2 border-3 border-black">
-			<div class="text-sm">● LIVE</div>
+		<div class="grid grid-cols-3 h-full">
+			<div class="border-r-4 border-black flex flex-col items-center justify-center p-6">
+				<div class="text-black text-5xl uppercase">weird</div>
+			</div>
+			<div class="border-r-4 border-black flex flex-col items-center justify-center p-6">
+				<img
+					alt="svgImg"
+					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgNDggNDgiIHdpZHRoPSI0OHB4IiBoZWlnaHQ9IjQ4cHgiPjxwYXRoIGZpbGw9IiMzODhlM2MiIGQ9Ik0zOS41LDQyaC05Yy0xLDAtMS45LTAuNi0yLjMtMS41Yy0wLjQtMC45LTAuMi0yLDAuNS0yLjdsOC4zLTguM3YtMy45TDIxLjMsNDEuMyBjLTAuNSwwLjUtMS4xLDAuNy0xLjgsMC43aC0xMWMtMSwwLTEuOS0wLjYtMi4zLTEuNWMtMC40LTAuOS0wLjItMiwwLjUtMi43TDMzLjUsMTFoLTMuOUwxMC4zLDMwLjNjLTAuNywwLjctMS44LDAuOS0yLjcsMC41IEM2LjYsMzAuNCw2LDI5LjUsNiwyOC41di0xMWMwLTAuNywwLjMtMS4zLDAuNy0xLjhsNC43LTQuN2gtM0M3LjEsMTEsNiw5LjksNiw4LjVTNy4xLDYsOC41LDZoOWMxLDAsMS45LDAuNiwyLjMsMS41IGMwLjQsMC45LDAuMiwyLTAuNSwyLjdMMTEsMTguNXYzLjlMMjYuNyw2LjdDMjcuMiw2LjMsMjcuOCw2LDI4LjUsNmgxMWMxLDAsMS45LDAuNiwyLjMsMS41YzAuNCwwLjksMC4yLDItMC41LDIuN0wxNC41LDM3aDMuOSBsMTkuMy0xOS4zYzAuNy0wLjcsMS44LTAuOSwyLjctMC41YzAuOSwwLjQsMS41LDEuMywxLjUsMi4zdjExYzAsMC43LTAuMywxLjMtMC43LDEuOEwzNi41LDM3aDNjMS40LDAsMi41LDEuMSwyLjUsMi41IFM0MC45LDQyLDM5LjUsNDJ6Ii8+PC9zdmc+"
+					class="size-64"
+				/>
+			</div>
+			<div class="flex flex-col items-center justify-center p-6">
+				<div class="text-black text-5xl mb-2 uppercase">use</div>
+				<div class="text-black text-5xl uppercase">cases</div>
+			</div>
 		</div>
-
-		<div class="absolute inset-0 flex flex-col items-center justify-center">
-			<div class="text-blue-500 text-9xl mb-4 uppercase">Intro</div>
-		</div>
-
-		<div class="absolute bottom-8 left-8 text-black text-xl">[ THE OVERVIEW ]</div>
 	</div>
 
-	<div class="aspect-video w-full bg-black text-white grid place-items-center">
+	<!-- <div class="aspect-video w-full bg-black text-white grid place-items-center">
 		<div class="text-center space-y-12">
 			<p>starts in</p>
 
 			<p class="font-bold text-9xl">{timer}</p>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Download button -->
 	<div class="text-center">
 		<button
-			on:click={downloadThumbnail}
+			onclick={downloadThumbnail}
 			class="px-6 py-3 bg-blue-600 text-white border-2 border-black cursor-pointer hover:bg-blue-700"
 		>
 			Download Thumbnail (HD)
