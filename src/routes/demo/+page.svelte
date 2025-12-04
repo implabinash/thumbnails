@@ -3,6 +3,15 @@
 	import * as htmlToImage from 'html-to-image';
 
 	let thumbnailEl: HTMLElement | null = null;
+	let timer = $state(1111111);
+
+	$effect(() => {
+		if (timer >= 0) {
+			setTimeout(() => {
+				timer -= 1;
+			}, 1000);
+		}
+	});
 
 	async function downloadThumbnail() {
 		if (!thumbnailEl) return;
@@ -48,6 +57,14 @@
 		</div>
 
 		<div class="absolute bottom-8 left-8 text-black text-xl">[ THE OVERVIEW ]</div>
+	</div>
+
+	<div class="aspect-video w-full bg-black text-white grid place-items-center">
+		<div class="text-center space-y-12">
+			<p>starts in</p>
+
+			<p class="font-bold text-9xl">{timer}</p>
+		</div>
 	</div>
 
 	<!-- Download button -->
