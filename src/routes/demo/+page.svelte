@@ -65,7 +65,7 @@
 		<div
 			class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-2 border-3 border-black"
 		>
-			<div class="text-lg uppercase">part: 02</div>
+			<div class="text-lg uppercase">part: 03</div>
 		</div>
 	</div>
 
