@@ -35,21 +35,42 @@
 	<!-- Thumbnail -->
 	<div
 		bind:this={thumbnailEl}
-		class="w-full aspect-video bg-white border-4 border-black relative overflow-hidden"
+		class="w-full aspect-video bg-white border-4 border-black relative overflow-hidden flex"
 	>
-		<div class="grid grid-cols-2 h-full">
-			<div class="border-r-4 border-b-4 border-black flex items-center justify-center">
-				<div class="text-5xl uppercase">SQL</div>
+		<!-- Left side: Strikethrough list -->
+		<div class="w-2/5 bg-gray-100 border-r-4 border-black flex flex-col justify-center pl-12">
+			<div class="space-y-6">
+				<div class="relative">
+					<div class="text-gray-400 text-4xl">Learn SQL</div>
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full h-1 bg-red-600"></div>
+					</div>
+				</div>
+				<div class="relative">
+					<div class="text-gray-400 text-4xl">SQL Practice</div>
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full h-1 bg-red-600"></div>
+					</div>
+				</div>
+				<div class="relative">
+					<div class="text-gray-400 text-4xl">SQL Bootcamp</div>
+					<div class="absolute inset-0 flex items-center">
+						<div class="w-full h-1 bg-red-600"></div>
+					</div>
+				</div>
 			</div>
-			<div class="border-b-4 border-black flex items-center justify-center bg-gray-50">
-				<div class="text-5xl uppercase">Murder</div>
+		</div>
+
+		<!-- Right side: Score -->
+		<div class="w-3/5 flex items-center justify-center relative">
+			<div class="space-y-10">
+				<div class="text-black text-8xl mb-4">SQL</div>
+				<div class="text-black text-8xl mb-4">Bolt</div>
 			</div>
-			<div class="border-r-4 border-black flex items-center justify-center bg-gray-50">
-				<div class="text-5xl uppercase">Mystery</div>
-			</div>
-			<div class="flex items-center justify-center bg-green-400">
-				<div class="uppercase text-6xl">solved</div>
-			</div>
+
+			<!-- <div class="absolute bottom-6 right-6 bg-red-500 text-white px-4 py-2 border-3 border-black">
+				<div class="text-sm">Part: 02</div>
+			</div> -->
 		</div>
 	</div>
 
