@@ -69,7 +69,7 @@
 			</div>
 
 			<div class="absolute bottom-6 right-6 bg-red-500 text-white px-4 py-2 border-3 border-black">
-				<div class="text-sm">Part: 03</div>
+				<div class="text-sm">Part: 04</div>
 			</div>
 		</div>
 	</div>
