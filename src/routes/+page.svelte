@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { resolve } from "$app/paths";
 </script>
 
 <section class="max-w-4xl mx-auto p-8 space-y-8">
 	<div class="text-center">
 		<a
-			href={resolve('/demo')}
+			href={resolve("/demo")}
 			class="text-2xl underline hover:bg-black hover:text-white hover:no-underline">Demo</a
 		>
 	</div>
@@ -148,6 +148,67 @@
 				<div class="text-yellow-400 text-8xl mb-4">DRIM</div>
 				<div class="text-black text-xl">(D×R×I)/M</div>
 			</div>
+		</div>
+	</div>
+
+	<!-- 1. Postgres Day 1 -->
+	<div class="w-full aspect-video bg-blue-600 relative overflow-hidden">
+		<div class="absolute inset-0 flex flex-col items-center justify-center">
+			<div class="text-white text-6xl font-black mb-4">POSTGRES</div>
+			<div class="text-white text-9xl font-black">01</div>
+		</div>
+		<div class="absolute bottom-8 left-8 text-white text-xl opacity-80">Getting Started</div>
+	</div>
+
+	<!-- 2. Postgres Indexing -->
+	<div class="w-full aspect-video bg-white relative overflow-hidden">
+		<div class="absolute inset-0 flex items-center justify-center">
+			<div class="text-center">
+				<div class="text-gray-400 text-3xl font-normal mb-4">postgres</div>
+				<div class="text-black text-9xl font-black">INDEX</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 3. Postgres Query -->
+	<div class="w-full aspect-video bg-black relative overflow-hidden">
+		<div class="absolute inset-0 flex items-center justify-center px-12">
+			<div class="text-center">
+				<div class="text-gray-400 text-4xl font-mono mb-4">SELECT *</div>
+				<div class="text-white text-7xl font-black">POSTGRES</div>
+				<div class="text-gray-400 text-4xl font-mono mt-4">FROM basics</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 8. SQL Challenge Format -->
+	<div class="w-full aspect-video bg-black relative overflow-hidden">
+		<div class="absolute inset-0 flex flex-col items-center justify-center">
+			<div class="text-green-400 text-4xl font-mono mb-6">advent_of_sql</div>
+			<div class="text-white text-9xl font-black">12</div>
+		</div>
+		<div class="absolute top-8 left-8 text-green-400 text-sm font-mono">⭐ challenge</div>
+	</div>
+
+	<!-- 5. SQL Daily Challenge -->
+	<div class="w-full aspect-video bg-white relative overflow-hidden">
+		<div class="absolute inset-0 flex items-center justify-center">
+			<div class="text-center">
+				<div class="text-gray-400 text-3xl mb-2">DAY</div>
+				<div class="text-black text-9xl font-black">07</div>
+				<div class="bg-green-500 text-white px-6 py-2 text-2xl font-bold mt-4 inline-block">
+					SOLVED
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 7. Query Time -->
+	<div class="w-full aspect-video bg-black relative overflow-hidden">
+		<div class="absolute inset-0 flex flex-col items-center justify-center">
+			<div class="text-gray-400 text-3xl mb-4">execution time:</div>
+			<div class="text-green-400 text-9xl font-black mono">0.3ms</div>
+			<div class="text-white text-3xl mt-4">OPTIMIZED</div>
 		</div>
 	</div>
 </section>

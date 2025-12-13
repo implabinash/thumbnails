@@ -33,43 +33,15 @@
 
 	<!-- bind:this={thumbnailEl} -->
 	<!-- Thumbnail -->
-	<div
-		bind:this={thumbnailEl}
-		class="w-full aspect-video bg-white border-4 border-black relative overflow-hidden flex"
-	>
-		<!-- Left side: Strikethrough list -->
-		<div class="w-2/5 bg-gray-100 border-r-4 border-black flex flex-col justify-center pl-12">
+	<div bind:this={thumbnailEl} class="w-full aspect-video bg-black relative overflow-hidden">
+		<!-- <div class="absolute top-8 left-8 text-green-400 text-sm font-mono">part: 01</div> -->
+
+		<div class="absolute inset-0 flex items-center justify-center px-12">
 			<div class="space-y-6">
-				<div class="relative">
-					<div class="text-gray-400 text-4xl">Learn SQL</div>
-					<div class="absolute inset-0 flex items-center">
-						<div class="w-full h-1 bg-red-600"></div>
-					</div>
-				</div>
-				<div class="relative">
-					<div class="text-gray-400 text-4xl">SQL Practice</div>
-					<div class="absolute inset-0 flex items-center">
-						<div class="w-full h-1 bg-red-600"></div>
-					</div>
-				</div>
-				<div class="relative">
-					<div class="text-gray-400 text-4xl">SQL Bootcamp</div>
-					<div class="absolute inset-0 flex items-center">
-						<div class="w-full h-1 bg-red-600"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Right side: Score -->
-		<div class="w-3/5 flex items-center justify-center relative">
-			<div class="space-y-10">
-				<div class="text-black text-8xl mb-4">SQL</div>
-				<div class="text-black text-8xl mb-4">Bolt</div>
-			</div>
-
-			<div class="absolute bottom-6 right-6 bg-red-500 text-white px-4 py-2 border-3 border-black">
-				<div class="text-sm">Part: 04</div>
+				<div class="text-4xl font-bold text-blue-400">SELECT</div>
+				<div class="text-white text-7xl font-black indent-16">basics</div>
+				<div class="text-blue-400 text-4xl font-bold">FROM</div>
+				<div class="text-white text-7xl font-black indent-16">postgres;</div>
 			</div>
 		</div>
 	</div>
